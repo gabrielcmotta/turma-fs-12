@@ -236,6 +236,31 @@ function funcao() {
 console.log(variavelLocal); // Erro! variavelLocal não está acessível aqui
 ```
 
+## O que é um array?
+
+Array é uma estrutura de dados que permite armazenar vários valores em uma única variável.
+
+```javascript
+const numeros = [1, 2, 3, 4, 5];
+```
+
+```javascript
+const frutas = ["maçã", "banana", "laranja", "uva"];
+```
+
+## O que é um objeto?
+
+Objeto é uma estrutura de dados que permite armazenar vários valores em uma única variável.
+Cada valor é armazenado em uma propriedade do objeto.
+
+```javascript
+const pessoa = {
+  nome: "João",
+  idade: 30,
+  cidade: "São Paulo",
+};
+```
+
 ## Prática
 
 ### Vite
