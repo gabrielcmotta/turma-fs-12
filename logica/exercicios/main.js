@@ -1,4 +1,6 @@
 // on type enter exec calcula()
+let vendedores = [];
+
 document.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
     calcula()
@@ -31,13 +33,39 @@ function calcula() {
 
   let salarioTotal = salarioFixo + totalVendas * porcentagemComissao
 
-  document.getElementById("resultado").innerHTML = `
-    O vendedor ${nome} tem o salário fixo de ${moedaBrasil(salarioFixo)}
-    e vendeu no total ${moedaBrasil(totalVendas)}.
-    Sendo assim o salário final do vendedor é: ${moedaBrasil(salarioTotal)}.
-  `
+  let vendedor = {
+    nome: nome,
+    salarioFixo: salarioFixo,
+    salarioTotal: salarioTotal
+  }
+
+  vendedores.push(vendedor)
+
+  montaTabela()
+  limpaCampos()
 }
 
 function moedaBrasil(valor) {
   return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+}
+
+function montaTabela() {
+  document.getElementById("vendedores").innerHTML = ''
+
+  for (let i = 0; i < vendedores.length; i++) {
+    let vendedor = vendedores[i]
+    document.getElementById("vendedores").innerHTML += `
+      <tr>
+        <td>${vendedor.nome}</td>
+        <td>${moedaBrasil(vendedor.salarioFixo)}</td>
+        <td>${moedaBrasil(vendedor.salarioTotal)}</td>
+      </tr>
+    `
+  }
+}
+
+function limpaCampos() {
+  document.getElementById('nome').value = ''
+  document.getElementById('salarioFixo').value = ''
+  document.getElementById('totalVendas').value = ''
 }
