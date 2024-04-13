@@ -1,11 +1,17 @@
 // on type enter exec calcula()
-let vendedores = [];
+let vendedores = [{
+  nome: "Eduardo",
+  salarioFixo: 1500,
+  salarioTotal: 5600
+}];
 
 document.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
     calcula()
   }
 })
+
+montaTabela()
 
 function calcula() {
   let nome = document.getElementById('nome').value
@@ -45,6 +51,26 @@ function calcula() {
   limpaCampos()
 }
 
+function excluiVendedor(index) {
+  Swal.fire({
+    title: "Tem certeza que deseja excluir? Não vai ter volta!!",
+    showCancelButton: true,
+    confirmButtonText: "Excluir",
+    cancelButtonText: `Cancelar`
+  }).then((result) => {
+    if (result.isConfirmed) {
+      vendedores.splice(index, 1)
+
+      montaTabela()
+
+      Swal.fire({
+        title: 'Sucesso',
+        icon: 'success',
+      })
+    }
+  });
+}
+
 function moedaBrasil(valor) {
   return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
@@ -59,6 +85,15 @@ function montaTabela() {
         <td>${vendedor.nome}</td>
         <td>${moedaBrasil(vendedor.salarioFixo)}</td>
         <td>${moedaBrasil(vendedor.salarioTotal)}</td>
+        <td>
+          <button type="button" class="btn btn-info">
+            <i class="bi bi-pencil-square"></i> Editar
+          </button>
+          <button type="button" onclick="excluiVendedor(${i})" class="btn btn-danger">
+            <i class="bi bi-trash"></i>
+            Excluir
+          </button>
+        </td>
       </tr>
     `
   }
