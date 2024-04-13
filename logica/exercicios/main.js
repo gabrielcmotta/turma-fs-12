@@ -2,13 +2,20 @@
 let vendedores = [{
   nome: "Eduardo",
   salarioFixo: 1500,
-  salarioTotal: 5600
+  salarioTotal: 5600,
+  totalVendas: 25000
 }];
+
+let indiceParaEditar = null
 
 document.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
     calcula()
   }
+})
+
+document.getElementById('btn-calcular').addEventListener('click', function () {
+  calcula()
 })
 
 montaTabela()
@@ -42,10 +49,17 @@ function calcula() {
   let vendedor = {
     nome: nome,
     salarioFixo: salarioFixo,
-    salarioTotal: salarioTotal
+    salarioTotal: salarioTotal,
+    totalVendas: totalVendas
   }
 
-  vendedores.push(vendedor)
+  if (indiceParaEditar === null) {
+    vendedores.push(vendedor)
+  } else {
+    vendedores[indiceParaEditar] = vendedor
+
+    indiceParaEditar = null
+  }
 
   montaTabela()
   limpaCampos()
@@ -71,6 +85,16 @@ function excluiVendedor(index) {
   });
 }
 
+function editaVendedor(index) {
+  let vendedor = vendedores[index]
+
+  document.getElementById('nome').value = vendedor.nome
+  document.getElementById('salarioFixo').value = vendedor.salarioFixo
+  document.getElementById('totalVendas').value = vendedor.totalVendas
+
+  indiceParaEditar = index
+}
+
 function moedaBrasil(valor) {
   return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 }
@@ -86,7 +110,7 @@ function montaTabela() {
         <td>${moedaBrasil(vendedor.salarioFixo)}</td>
         <td>${moedaBrasil(vendedor.salarioTotal)}</td>
         <td>
-          <button type="button" class="btn btn-info">
+          <button type="button" onclick="editaVendedor(${i})" class="btn btn-info">
             <i class="bi bi-pencil-square"></i> Editar
           </button>
           <button type="button" onclick="excluiVendedor(${i})" class="btn btn-danger">
