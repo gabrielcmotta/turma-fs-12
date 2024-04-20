@@ -14,6 +14,26 @@
       "name": "Isaias de Jesus",
       "email": "isaias@eusouauniversal.com",
       "id": "eed1"
+    },
+    {
+      "id": "53cb",
+      "name": "Vinicius",
+      "email": "vinicius@estourado.js"
+    },
+    {
+      "id": "7d66",
+      "name": "Edson",
+      "email": "edson@i9nove.com"
+    },
+    {
+      "id": "ebc6",
+      "name": "Leonardo",
+      "email": "leonardo@dev.com"
+    },
+    {
+      "id": "d87d",
+      "name": "Thiago",
+      "email": "thiago@tuf.com"
     }
   ],
   "profile": {
