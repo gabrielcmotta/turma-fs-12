@@ -1,0 +1,22 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "name": "Eduardo Roseo",
+      "email": "eduardoroseo@gmail.com"
+    },
+    {
+      "id": "45c3",
+      "name": "Washington Soares",
+      "email": "email@gmail.com"
+    },
+    {
+      "name": "Isaias de Jesus",
+      "email": "isaias@eusouauniversal.com",
+      "id": "eed1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
