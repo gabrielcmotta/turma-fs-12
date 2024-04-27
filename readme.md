@@ -10,3 +10,7 @@ O repositório está organizado da seguinte forma:
 - `2-javascript`: códigos e materiais de estudo sobre a linguagem de programação JavaScript.
 - `3-logica`: códigos e materiais de estudo sobre lógica de programação.
 - `4-javascript-consumindo-api`: códigos e materiais de estudo sobre como consumir APIs com JavaScript.
+
+## Atividade para entregar dia 11/05/2024
+
+- [Clique aqui para ver a atividade](atividade.md)
