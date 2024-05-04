@@ -10,6 +10,8 @@ O repositório está organizado da seguinte forma:
 - `2-javascript`: códigos e materiais de estudo sobre a linguagem de programação JavaScript.
 - `3-logica`: códigos e materiais de estudo sobre lógica de programação.
 - `4-javascript-consumindo-api`: códigos e materiais de estudo sobre como consumir APIs com JavaScript.
+- `5-github`: Materiais de estudo sobre o GitHub.
+- `6-vercel`: O que são cloud providers e como publicar minha primeira aplicação na vercel.
 
 ## Atividade para entregar dia 11/05/2024
 
