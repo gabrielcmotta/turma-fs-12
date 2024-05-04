@@ -20,9 +20,12 @@ function montaTabela() {
                         >
                             <i class="bi bi-pencil-square"></i> Editar
                         </button>
-                        <button type="button btn-sm" class="btn btn-danger">
-                            <i class="bi bi-trash"></i>
-                            Excluir
+                        <button
+                            type="button btn-sm"
+                            onclick="excluirUsuario(${usuario.id})"
+                            class="btn btn-danger">
+                                <i class="bi bi-trash"></i>
+                                Excluir
                         </button>
                         </td>
                     <tr/>
@@ -42,6 +45,17 @@ function editarUsuario(id, name, email) {
 
     editID = id;
     document.getElementById('btn-cadastrar-usuario').innerText = "Atualizar"
+}
+
+function excluirUsuario(id) {
+    fetch(`http://localhost:3000/usuarios/${id}`, {
+            method: 'DELETE'
+        })
+            .then(resposta => resposta.json())
+            .then(usuario => {
+                montaTabela()
+                alert("Excluído com sucesso!")
+            })
 }
 
 document.addEventListener('DOMContentLoaded', function() {
