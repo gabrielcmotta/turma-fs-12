@@ -63,6 +63,7 @@ Para publicar uma aplicação na Vercel, basta seguir os seguintes passos:
 3. Faça o login com o comando `vercel login`
 4. Faça o deploy da sua aplicação com o comando `vercel`
 5. Acesse a URL gerada e veja sua aplicação publicada
+6. Acesse o painel da Vercel em [https://vercel.com/dashboard](https://vercel.com/dashboard) para gerenciar suas aplicações
 
 E pronto, sua aplicação está publicada na Vercel.
 
