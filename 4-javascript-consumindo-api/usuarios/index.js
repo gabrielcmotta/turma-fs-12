@@ -48,6 +48,7 @@ function editarUsuario(id, name, email) {
 }
 
 function excluirUsuario(id) {
+    // LIB Sweetalert do javascript: https://sweetalert2.github.io/#examples
     Swal.fire({
         title: "Você tem certeza?",
         text: "Você não poderá reverter isso!",
