@@ -1,3 +1,5 @@
+let editID = null;
+
 function montaTabela() {
     fetch(`http://localhost:3000/usuarios`)
         .then(resposta => resposta.json())
@@ -10,7 +12,19 @@ function montaTabela() {
                         <td>${usuario.id}</td>
                         <td>${usuario.name}</td>
                         <td>${usuario.email}</td>
-                        <td>jaja eu boto</td>
+                        <td>
+                        <button 
+                            type="button btn-sm"
+                            onclick="editarUsuario('${usuario.id}', '${usuario.name}', '${usuario.email}')"
+                            class="btn btn-info"
+                        >
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </button>
+                        <button type="button btn-sm" class="btn btn-danger">
+                            <i class="bi bi-trash"></i>
+                            Excluir
+                        </button>
+                        </td>
                     <tr/>
                 `
             })
@@ -20,6 +34,14 @@ function montaTabela() {
 function limparFormulario() {
     document.getElementById('nome').value = null
     document.getElementById('email').value = null
+}
+
+function editarUsuario(id, name, email) {
+    document.getElementById('nome').value = name;
+    document.getElementById('email').value = email;
+
+    editID = id;
+    document.getElementById('btn-cadastrar-usuario').innerText = "Atualizar"
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -43,6 +65,21 @@ document.getElementById("btn-cadastrar-usuario").addEventListener("click", funct
     let body = {
         name: inputNome,
         email: inputEmail
+    }
+
+    if (editID != null) {
+        fetch(`http://localhost:3000/usuarios/${editID}`, {
+            method: 'PUT',
+            body: JSON.stringify(body)
+        })
+            .then(resposta => resposta.json())
+            .then(usuario => {
+                montaTabela()
+                limparFormulario()
+                document.getElementById('btn-cadastrar-usuario').innerText = "Cadastrar"
+                editID = null
+            })
+        return;
     }
 
     fetch(`http://localhost:3000/usuarios`, {
