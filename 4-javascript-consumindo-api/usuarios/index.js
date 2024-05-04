@@ -22,7 +22,7 @@ function montaTabela() {
                         </button>
                         <button
                             type="button btn-sm"
-                            onclick="excluirUsuario(${usuario.id})"
+                            onclick="excluirUsuario('${usuario.id}')"
                             class="btn btn-danger">
                                 <i class="bi bi-trash"></i>
                                 Excluir
@@ -48,14 +48,29 @@ function editarUsuario(id, name, email) {
 }
 
 function excluirUsuario(id) {
-    fetch(`http://localhost:3000/usuarios/${id}`, {
-            method: 'DELETE'
-        })
-            .then(resposta => resposta.json())
-            .then(usuario => {
-                montaTabela()
-                alert("Excluído com sucesso!")
+    Swal.fire({
+        title: "Você tem certeza?",
+        text: "Você não poderá reverter isso!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim, excluir!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`http://localhost:3000/usuarios/${id}`, {
+                method: 'DELETE'
             })
+                .then(resposta => resposta.json())
+                .then(usuario => {
+                    montaTabela()
+                    Swal.fire({
+                        title: "Excluído com sucesso!",
+                        icon: "error"
+                    });
+                })
+        }
+    });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -92,6 +107,12 @@ document.getElementById("btn-cadastrar-usuario").addEventListener("click", funct
                 limparFormulario()
                 document.getElementById('btn-cadastrar-usuario').innerText = "Cadastrar"
                 editID = null
+                Swal.fire({
+                    title: 'Atualizado com sucesso',
+                    icon: 'success',
+                    timer: 2000,
+                    timerProgressBar: true,
+                })
             })
         return;
     }
@@ -102,6 +123,12 @@ document.getElementById("btn-cadastrar-usuario").addEventListener("click", funct
     })
         .then(resposta => resposta.json())
         .then(usuario => {
+            Swal.fire({
+                title: 'Cadastrado com sucesso',
+                icon: 'success',
+                timer: 2000,
+                timerProgressBar: true,
+            })
             montaTabela()
             limparFormulario()
         })
