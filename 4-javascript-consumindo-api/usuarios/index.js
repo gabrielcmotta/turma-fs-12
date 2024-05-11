@@ -70,7 +70,7 @@ function excluirUsuario(id) {
                     montaTabela()
                     Swal.fire({
                         title: "Excluído com sucesso!",
-                        icon: "error"
+                        icon: "success"
                     });
                 })
         }
