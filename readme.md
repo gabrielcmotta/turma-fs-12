@@ -12,7 +12,14 @@ O repositório está organizado da seguinte forma:
 - `4-javascript-consumindo-api`: códigos e materiais de estudo sobre como consumir APIs com JavaScript.
 - `5-github`: Materiais de estudo sobre o GitHub.
 - `6-vercel`: O que são cloud providers e como publicar minha primeira aplicação na vercel.
+- `7-react`: Materiais de estudo sobre React
 
-## Atividade para entregar dia 11/05/2024
+## Atividade para entregar dia 25/05/2024
 
-- [Clique aqui para ver a atividade](atividade.md)
+Criar uma landing page para anúncio de um curso de programação Full-Stack.
+
+- [ ] Deve ser feito utilizando React
+- [ ] Deve conter uma seção de depoimentos de alunos
+- [ ] Deve conter uma seção de perguntas frequentes
+- [ ] Deve conter uma seção de contato
+
