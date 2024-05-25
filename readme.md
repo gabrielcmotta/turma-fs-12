@@ -14,12 +14,11 @@ O repositório está organizado da seguinte forma:
 - `6-vercel`: O que são cloud providers e como publicar minha primeira aplicação na vercel.
 - `7-react`: Materiais de estudo sobre React
 
-## Atividade para entregar dia 25/05/2024
+## Atividade para entregar dia 01/06/2024
 
-Criar uma landing page para anúncio de um curso de programação Full-Stack.
+Criar uma tabela com um formulário alimentando essa tabela
 
-- [ ] Deve ser feito utilizando React
-- [ ] Deve conter uma seção de depoimentos de alunos
-- [ ] Deve conter uma seção de perguntas frequentes
-- [ ] Deve conter uma seção de contato
+- [ ] Seguir exemplo da pasta 7-react/aula-react
+- [ ] Não fazer de usuários
+- [ ] Vídeo de auxílio: [Link](https://www.youtube.com/watch?v=YVEVrigByKY)
 

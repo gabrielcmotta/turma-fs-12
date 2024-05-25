@@ -1,4 +1,14 @@
-function Tabela() {
+type Usuario = {
+  id: number;
+  nome: string;
+  email: string;
+};
+
+type TabelaProps = {
+  usuarios: Array<Usuario>;
+};
+
+function Tabela(props: TabelaProps) {
   return (
     <table className="table table-striped table-hover">
       <thead>
@@ -10,12 +20,14 @@ function Tabela() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>123</td>
-          <td>Eduardo</td>
-          <td>eduardo@gmail.com</td>
-          <td>botoes</td>
-        </tr>
+        {props.usuarios.map((usuario) => (
+          <tr key={usuario.id}>
+            <td>{usuario.id}</td>
+            <td>{usuario.nome}</td>
+            <td>{usuario.email}</td>
+            <td>botoes</td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

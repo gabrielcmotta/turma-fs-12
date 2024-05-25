@@ -2,10 +2,10 @@ type CabecalhoProps = {
   titulo: string;
 };
 
-function Cabecalho({ titulo }: CabecalhoProps) {
+function Cabecalho(props: CabecalhoProps) {
   return (
     <div className="row text-center">
-      <h1>{titulo}</h1>
+      <h1>{props.titulo}</h1>
     </div>
   );
 }
