@@ -1,7 +1,7 @@
 import { useState } from "react";
-import Cabecalho from "./components/Cabecalho";
-import Form from "./components/Form";
-import Tabela from "./components/Tabela";
+import Cabecalho from "../../components/Cabecalho";
+import Form from "../../components/Form";
+import Tabela from "../../components/Tabela";
 
 type Usuario = {
   id: number;
@@ -9,7 +9,7 @@ type Usuario = {
   email: string;
 };
 
-function App() {
+function Usuarios() {
   const [usuarios, setUsuarios] = useState<Array<Usuario>>([]);
 
   return (
@@ -21,4 +21,4 @@ function App() {
   );
 }
 
-export default App;
+export default Usuarios;
