@@ -1,4 +1,5 @@
 import { useState } from "react";
+import usuariosService from "../../services/usuarios";
 
 type Usuario = {
   id: number;
@@ -15,14 +16,15 @@ function Form(props: FormProps) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
 
-  const salvarUsuario = function () {
+  const salvarUsuario = async function () {
     const novoUsuario: Usuario = {
-      id: Math.random(),
       nome,
       email,
     };
 
-    props.setUsuarios([...props.usuarios, novoUsuario]);
+    const usuarioCriado = await usuariosService.criarUsuario(novoUsuario);
+
+    props.setUsuarios([...props.usuarios, usuarioCriado]);
 
     setNome("");
     setEmail("");
