@@ -1,5 +1,5 @@
 declare type Usuario = {
-  id?: number;
+  id: string | null;
   nome: string;
   email: string;
 };

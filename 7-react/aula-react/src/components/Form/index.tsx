@@ -2,26 +2,22 @@ import { useState } from "react";
 import usuariosService from "../../services/usuarios";
 import { useUsuario } from "../../contexts/UsuarioProvider";
 
-type FormProps = {
-  usuarios: Array<Usuario>;
-  setUsuarios: (usuarios: Array<Usuario>) => void;
-};
-
-function Form(props: FormProps) {
+function Form() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
 
-  const { qtdUsuarios, setQtdUsuarios } = useUsuario();
+  const { qtdUsuarios, setQtdUsuarios, usuarios, setUsuarios } = useUsuario();
 
   const salvarUsuario = async function () {
     const novoUsuario: Usuario = {
       nome,
       email,
+      id: null,
     };
 
     const usuarioCriado = await usuariosService.criarUsuario(novoUsuario);
 
-    props.setUsuarios([...props.usuarios, usuarioCriado]);
+    setUsuarios([...usuarios, usuarioCriado]);
     setQtdUsuarios(qtdUsuarios + 1);
 
     setNome("");

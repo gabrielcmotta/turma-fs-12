@@ -1,8 +1,8 @@
-type TabelaProps = {
-  usuarios: Array<Usuario>;
-};
+import { useUsuario } from "../../contexts/UsuarioProvider";
 
-function Tabela(props: TabelaProps) {
+function Tabela() {
+  const { deletarUsuario, usuarios } = useUsuario();
+
   return (
     <table className="table table-striped table-hover">
       <thead>
@@ -14,12 +14,19 @@ function Tabela(props: TabelaProps) {
         </tr>
       </thead>
       <tbody>
-        {props.usuarios.map((usuario) => (
+        {usuarios.map((usuario) => (
           <tr key={usuario.id}>
             <td>{usuario.id}</td>
             <td>{usuario.nome}</td>
             <td>{usuario.email}</td>
-            <td>botoes</td>
+            <td>
+              <button
+                className="btn btn-danger"
+                onClick={() => deletarUsuario(usuario.id)}
+              >
+                Deletar
+              </button>
+            </td>
           </tr>
         ))}
       </tbody>

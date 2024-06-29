@@ -8,9 +8,18 @@ const usuariosService = {
   },
 
   criarUsuario: async (usuario: Usuario) => {
-    const response = await api.post("usuarios", usuario);
+    const response = await api.post("usuarios", {
+      nome: usuario.nome,
+      email: usuario.email,
+    });
 
     return response.data;
+  },
+
+  excluirUsuario: async (id: string | null) => {
+    await api.delete(`usuarios/${id}`);
+
+    return true;
   },
 };
 
