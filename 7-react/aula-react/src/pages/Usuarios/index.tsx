@@ -3,20 +3,18 @@ import Cabecalho from "../../components/Cabecalho";
 import Form from "../../components/Form";
 import Tabela from "../../components/Tabela";
 import usuariosService from "../../services/usuarios";
-
-type Usuario = {
-  id: number;
-  nome: string;
-  email: string;
-};
+import { useUsuario } from "../../contexts/UsuarioProvider";
 
 function Usuarios() {
   const [usuarios, setUsuarios] = useState<Array<Usuario>>([]);
+
+  const { setQtdUsuarios } = useUsuario();
 
   const carregarUsuarios = async () => {
     const usuariosDaApi = await usuariosService.listarUsuarios();
 
     setUsuarios(usuariosDaApi);
+    setQtdUsuarios(usuariosDaApi.length);
   };
 
   useEffect(() => {

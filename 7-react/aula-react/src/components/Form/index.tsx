@@ -1,11 +1,6 @@
 import { useState } from "react";
 import usuariosService from "../../services/usuarios";
-
-type Usuario = {
-  id: number;
-  nome: string;
-  email: string;
-};
+import { useUsuario } from "../../contexts/UsuarioProvider";
 
 type FormProps = {
   usuarios: Array<Usuario>;
@@ -16,6 +11,8 @@ function Form(props: FormProps) {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
 
+  const { qtdUsuarios, setQtdUsuarios } = useUsuario();
+
   const salvarUsuario = async function () {
     const novoUsuario: Usuario = {
       nome,
@@ -25,6 +22,7 @@ function Form(props: FormProps) {
     const usuarioCriado = await usuariosService.criarUsuario(novoUsuario);
 
     props.setUsuarios([...props.usuarios, usuarioCriado]);
+    setQtdUsuarios(qtdUsuarios + 1);
 
     setNome("");
     setEmail("");
@@ -57,6 +55,9 @@ function Form(props: FormProps) {
           <button onClick={salvarUsuario} className="btn btn-primary">
             Salvar
           </button>
+        </div>
+        <div className="col d-flex align-items-end">
+          <span>Qtd Usuários: {qtdUsuarios}</span>
         </div>
       </div>
     </>

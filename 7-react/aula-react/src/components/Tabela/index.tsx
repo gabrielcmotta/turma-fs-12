@@ -1,9 +1,3 @@
-type Usuario = {
-  id: number;
-  nome: string;
-  email: string;
-};
-
 type TabelaProps = {
   usuarios: Array<Usuario>;
 };
