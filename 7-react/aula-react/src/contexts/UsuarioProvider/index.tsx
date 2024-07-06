@@ -5,6 +5,7 @@ type ChildrenProps = {
   children: React.ReactNode;
 };
 
+// MAPEAMENTO
 type UsuarioContextType = {
   qtdUsuarios: number;
   setQtdUsuarios: (qtdUsuarios: number) => void;
@@ -12,10 +13,13 @@ type UsuarioContextType = {
   setUsuarios: (usuarios: Array<Usuario>) => void;
   deletarUsuario: (id: string | null) => void;
   carregarUsuarios: () => void;
+  salvarUsuario: (usuario: Usuario) => void;
 };
 
 const UsuarioContext = createContext({} as UsuarioContextType);
+// MAPEAMENTO
 
+// IMPLEMENTAÇÃO
 const UsuarioProvider = ({ children }: ChildrenProps) => {
   const [qtdUsuarios, setQtdUsuarios] = useState(0);
   const [usuarios, setUsuarios] = useState<Array<Usuario>>([]);
@@ -34,25 +38,32 @@ const UsuarioProvider = ({ children }: ChildrenProps) => {
     setQtdUsuarios(usuariosDaApi.length);
   };
 
+  const salvarUsuario = async (usuario: Usuario) => {
+    const usuarioCriado = await usuariosService.criarUsuario(usuario);
+
+    setUsuarios([...usuarios, usuarioCriado]);
+    setQtdUsuarios(qtdUsuarios + 1);
+  };
+
   useEffect(() => {
     carregarUsuarios();
   }, []);
 
-  const heranca: UsuarioContextType = {
+  const value: UsuarioContextType = {
     qtdUsuarios,
     setQtdUsuarios,
     deletarUsuario,
     carregarUsuarios,
     usuarios,
     setUsuarios,
+    salvarUsuario,
   };
 
   return (
-    <UsuarioContext.Provider value={heranca}>
-      {children}
-    </UsuarioContext.Provider>
+    <UsuarioContext.Provider value={value}>{children}</UsuarioContext.Provider>
   );
 };
+// IMPLEMENTAÇÃO
 
 const useUsuario = () => {
   const context = useContext(UsuarioContext);
