@@ -1,5 +1,6 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import Logout from "../Logout";
 
 function NavBar() {
   return (
@@ -21,6 +22,7 @@ function NavBar() {
             </li>
           </Nav>
         </Navbar.Collapse>
+        <Logout />
       </Container>
     </Navbar>
   );

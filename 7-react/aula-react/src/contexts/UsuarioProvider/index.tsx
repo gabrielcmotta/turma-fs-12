@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import usuariosService from "../../services/usuarios";
+import { useNavigate } from "react-router-dom";
 
 type ChildrenProps = {
   children: React.ReactNode;
@@ -16,6 +17,7 @@ type UsuarioContextType = {
   salvarUsuario: (usuario: Usuario) => void;
   authUser: Usuario | null;
   login: (email: string, senha: string) => void;
+  logout: () => void;
 };
 
 const UsuarioContext = createContext({} as UsuarioContextType);
@@ -26,6 +28,8 @@ const UsuarioProvider = ({ children }: ChildrenProps) => {
   const [qtdUsuarios, setQtdUsuarios] = useState(0);
   const [usuarios, setUsuarios] = useState<Array<Usuario>>([]);
   const [authUser, setAuthUser] = useState<Usuario | null>(null);
+
+  const navigate = useNavigate();
 
   const deletarUsuario = async (id: string | null) => {
     await usuariosService.excluirUsuario(id);
@@ -61,6 +65,13 @@ const UsuarioProvider = ({ children }: ChildrenProps) => {
 
     setAuthUser(usuarios[0]);
     localStorage.setItem("auth-user", JSON.stringify(usuarios[0]));
+    navigate("/");
+  };
+
+  const logout = async () => {
+    setAuthUser(null);
+    localStorage.removeItem("auth-user");
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -87,6 +98,7 @@ const UsuarioProvider = ({ children }: ChildrenProps) => {
     salvarUsuario,
     authUser,
     login,
+    logout,
   };
 
   return (
