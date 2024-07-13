@@ -17,6 +17,12 @@ const usuariosService = {
     return response.data;
   },
 
+  getUsuarioByEmail: async (email: string) => {
+    const response = await api.get(`usuarios?email=${email}`);
+
+    return response.data;
+  },
+
   excluirUsuario: async (id: string | null) => {
     await api.delete(`usuarios/${id}`);
 

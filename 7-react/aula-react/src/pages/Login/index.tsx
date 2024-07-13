@@ -3,6 +3,7 @@ import * as yup from "yup";
 import "./style.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useUsuario } from "../../contexts/UsuarioProvider";
 
 const schema = yup.object({
   email: yup
@@ -23,9 +24,19 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
+  const { login } = useUsuario();
+
   const fazerLogin = async function (data: FormData) {
-    alert("Login realizado com sucesso");
-    console.log(data);
+    try {
+      await login(data.email, data.senha);
+    } catch (error: Error | unknown) {
+      if (error instanceof Error) {
+        alert(error.message);
+        return;
+      }
+
+      alert("Erro ao fazer login");
+    }
   };
 
   return (

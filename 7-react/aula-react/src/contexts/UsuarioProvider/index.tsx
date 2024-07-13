@@ -15,6 +15,7 @@ type UsuarioContextType = {
   carregarUsuarios: () => void;
   salvarUsuario: (usuario: Usuario) => void;
   authUser: Usuario | null;
+  login: (email: string, senha: string) => void;
 };
 
 const UsuarioContext = createContext({} as UsuarioContextType);
@@ -47,8 +48,33 @@ const UsuarioProvider = ({ children }: ChildrenProps) => {
     setQtdUsuarios(qtdUsuarios + 1);
   };
 
+  const login = async (email: string, senha: string) => {
+    const usuarios = await usuariosService.getUsuarioByEmail(email);
+
+    if (usuarios.length === 0) {
+      throw Error("Email ou senha inválido!");
+    }
+
+    if (usuarios[0].senha !== senha) {
+      throw Error("Email ou senha inválido!");
+    }
+
+    setAuthUser(usuarios[0]);
+    localStorage.setItem("auth-user", JSON.stringify(usuarios[0]));
+  };
+
   useEffect(() => {
-    carregarUsuarios();
+    if (authUser) {
+      carregarUsuarios();
+    }
+  }, [authUser]);
+
+  useEffect(() => {
+    const authUser = localStorage.getItem("auth-user");
+
+    if (authUser) {
+      setAuthUser(JSON.parse(authUser));
+    }
   }, []);
 
   const value: UsuarioContextType = {
@@ -60,6 +86,7 @@ const UsuarioProvider = ({ children }: ChildrenProps) => {
     setUsuarios,
     salvarUsuario,
     authUser,
+    login,
   };
 
   return (
