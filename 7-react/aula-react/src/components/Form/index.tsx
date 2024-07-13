@@ -15,11 +15,34 @@ const schema = yup.object({
     .email("O campo deve ser um email válido")
     .required("O campo é requerido")
     .trim(),
+  senha: yup
+    .string()
+    .required("O campo é requerido")
+    .min(6, "O nome deve conter pelo menos 6 caracteres")
+    .test(
+      "uppercase",
+      "A senha deve conter pelo menos uma letra maiúscula",
+      (value) => {
+        return /[A-Z]/.test(value || "");
+      }
+    )
+    .test(
+      "lowercase",
+      "A senha deve conter pelo menos uma letra minúscula",
+      (value) => {
+        return /[a-z]/.test(value || "");
+      }
+    )
+    .test("number", "A senha deve conter pelo menos um número", (value) => {
+      return /[0-9]/.test(value || "");
+    })
+    .trim(),
 });
 
 type FormData = {
   nome: string;
   email: string;
+  senha: string;
 };
 
 function Form() {
@@ -71,6 +94,21 @@ function Form() {
             />
             {errors?.email?.message && (
               <div className="invalid-feedback">{errors?.email?.message}</div>
+            )}
+          </div>
+          <div className="col">
+            <label className="form-label">Senha</label>
+            <input
+              {...register("senha")}
+              type="password"
+              className={
+                errors?.senha?.message
+                  ? "form-control is-invalid"
+                  : "form-control"
+              }
+            />
+            {errors?.senha?.message && (
+              <div className="invalid-feedback">{errors?.senha?.message}</div>
             )}
           </div>
           <div className="col d-flex align-items-end">

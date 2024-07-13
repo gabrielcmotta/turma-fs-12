@@ -11,6 +11,7 @@ const usuariosService = {
     const response = await api.post("usuarios", {
       nome: usuario.nome,
       email: usuario.email,
+      senha: usuario.senha,
     });
 
     return response.data;
