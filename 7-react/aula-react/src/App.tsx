@@ -1,11 +1,11 @@
-import { useState } from "react";
 import Private from "./routes/Private";
 import Public from "./routes/Public";
+import { useUsuario } from "./contexts/UsuarioProvider";
 
 const App = () => {
-  const [autenticado, setAutenticado] = useState(true);
+  const { authUser } = useUsuario();
 
-  return <>{autenticado ? <Private /> : <Public />}</>;
+  return <>{authUser ? <Private /> : <Public />}</>;
 };
 
 export default App;

@@ -14,6 +14,7 @@ type UsuarioContextType = {
   deletarUsuario: (id: string | null) => void;
   carregarUsuarios: () => void;
   salvarUsuario: (usuario: Usuario) => void;
+  authUser: Usuario | null;
 };
 
 const UsuarioContext = createContext({} as UsuarioContextType);
@@ -23,6 +24,7 @@ const UsuarioContext = createContext({} as UsuarioContextType);
 const UsuarioProvider = ({ children }: ChildrenProps) => {
   const [qtdUsuarios, setQtdUsuarios] = useState(0);
   const [usuarios, setUsuarios] = useState<Array<Usuario>>([]);
+  const [authUser, setAuthUser] = useState<Usuario | null>(null);
 
   const deletarUsuario = async (id: string | null) => {
     await usuariosService.excluirUsuario(id);
@@ -57,6 +59,7 @@ const UsuarioProvider = ({ children }: ChildrenProps) => {
     usuarios,
     setUsuarios,
     salvarUsuario,
+    authUser,
   };
 
   return (
