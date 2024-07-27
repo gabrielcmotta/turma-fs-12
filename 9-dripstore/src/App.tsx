@@ -4,10 +4,10 @@ import "./index.css";
 
 function App() {
   return (
-    <>
+    <div className="bg-light-gray">
       <Navbar />
       <Home />
-    </>
+    </div>
   );
 }
 
