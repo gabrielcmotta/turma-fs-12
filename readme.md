@@ -14,11 +14,7 @@ O repositório está organizado da seguinte forma:
 - `6-vercel`: O que são cloud providers e como publicar minha primeira aplicação na vercel.
 - `7-react`: Materiais de estudo sobre React
 
-## Atividade para entregar dia 01/06/2024
+## Links úteis
 
-Criar uma tabela com um formulário alimentando essa tabela
-
-- [ ] Seguir exemplo da pasta 7-react/aula-react
-- [ ] Não fazer de usuários
-- [ ] Vídeo de auxílio: [Link](https://www.youtube.com/watch?v=YVEVrigByKY)
+- [Playlist Javascript](https://www.youtube.com/watch?v=g08WcKOHeK0&list=PLm-VCNNTu3LnlPhqxx03kvjQd3qF6EBdz)
 
