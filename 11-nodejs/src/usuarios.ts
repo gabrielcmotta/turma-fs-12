@@ -1,16 +1,16 @@
 export const usuarios = [
   {
-    id: 1,
+    id: "1",
     name: "Eduardo",
     email: "eduardo@gmail.com",
   },
   {
-    id: 2,
+    id: "2",
     name: "Maria",
     email: "maria@gmail.com",
   },
   {
-    id: 3,
+    id: "4",
     name: "Jose",
     email: "jose@gmail.com",
   },
