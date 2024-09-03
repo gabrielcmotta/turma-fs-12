@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    
-    <script>
-        let frutas = ["pêra", "uva", "melão", "pitomba", "ata", "cajarana"];
+  </head>
+  <body>
+    <h2>Dados do Usuário</h2>
 
-        for (let i = 0; i < frutas.length; i++) {
-            console.log(frutas[i])
-        }
+    <table id="tabela-dados">
+      <thead>
+        <tr>
+          <th>Nome</th>
 
-        const pessoa = {
-            nome: "João",
-            idade: 30,
-            cidade: "São Paulo",
-          }
+          <th>Idade</th>
 
+          <th>Profissão</th>
+        </tr>
+      </thead>
 
-        console.log(`Meu nome é ${pessoa.nome}, e tenho ${pessoa.idade}!`)
-    </script>
-</body>
+      <tbody id="corpo-tabela"></tbody>
+    </table>
+  </body>
+  <script src="main.js"></script>
 </html>

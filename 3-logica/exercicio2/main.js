@@ -13,7 +13,7 @@ function soma() {
     return
   }
 
-  let resultado = parseInt(numeroA) + parseInt(numeroB)
+  let resultado = parseInt(numeroA) + parseInt(numeroB) 
 
   document.getElementById('resultado').innerHTML = resultado
 }
