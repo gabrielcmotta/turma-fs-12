@@ -1,4 +1,4 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, Request, Response, Router } from "express";
 import { usuarios } from "./usuarios";
 
 const app: Express = express();
@@ -9,18 +9,18 @@ app.get("/usuarios", (req: Request, res: Response) => {
 });
 
 app.get("/usuarios/:id", (req: Request, res: Response) => {
-  const { id } = req.params
+    const { id } = req.params
 
-  const resultado = usuarios.filter(user => user.id == Number(id))
+    const resultado = usuarios.filter(user => user.id == id)
 
-  if (resultado.length == 0) {
-    return res.status(404)
-    .send({ error: "Usuário não encontrado"})
-    .json() 
-  }
+    if (resultado.length == 0) {
+      return res.status(404)
+        .send({ error: "Usuário não encontrado"})
+        .json()
+    }
 
-  res.send(resultado[0]).json()
-});
+    res.send(resultado[0]).json()
+})
 
 type UsuarioRequestDTO = {
   name: string
@@ -30,9 +30,21 @@ type UsuarioRequestDTO = {
 app.post("/usuarios", (req: Request, res: Response) => {
   const dados: UsuarioRequestDTO = req.body
 
+  if (!dados.email) {
+    return res.status(422)
+        .send({ error: "O campo email é obrigatório!"})
+        .json()
+  }
+
+  if (!dados.name) {
+    return res.status(422)
+        .send({ error: "O campo nome é obrigatório!"})
+        .json()
+  }
+
   const novoUsuario = {
     ...dados,
-    id: Math.random()
+    id: Math.random().toString()
   }
 
   usuarios.push(novoUsuario)
@@ -41,38 +53,56 @@ app.post("/usuarios", (req: Request, res: Response) => {
     .status(201)
     .send(novoUsuario)
     .json()
-
-});
-
+})
 
 app.put("/usuarios/:id", (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { name, email }: UsuarioRequestDTO = req.body;
+  const { id } = req.body;
+  const dados: UsuarioRequestDTO = req.body
 
-  const usuarioIndex = usuarios.findIndex(user => user.id == Number(id));
-
-  if (usuarioIndex === -1) {
-    return res.status(404).json({ error: "Usuário não encontrado" });
+  if (!dados.email) {
+    return res.status(422)
+        .send({ error: "O campo email é obrigatório!"})
+        .json()
   }
 
-  usuarios[usuarioIndex] = { ...usuarios[usuarioIndex], name, email };
+  if (!dados.name) {
+    return res.status(422)
+        .send({ error: "O campo nome é obrigatório!"})
+        .json()
+  }
 
-  res.json(usuarios[usuarioIndex]);
-});
+  const indiceUsuario = usuarios.findIndex(user => user.id == id)
+
+  if (indiceUsuario < 0) {
+    return res.status(404)
+        .send({ error: "Usuário não encontrado"})
+        .json()
+  }
+
+  usuarios[indiceUsuario] = {
+    ...usuarios[indiceUsuario],
+    name: dados.name,
+    email: dados.email
+  }
+
+  res.send(usuarios[indiceUsuario]).json()
+})
 
 app.delete("/usuarios/:id", (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const usuarioIndex = usuarios.findIndex(user => user.id == Number(id));
+  const indiceUsuario = usuarios.findIndex(user => user.id == id)
 
-  if (usuarioIndex === -1) {
-    return res.status(404).json({ error: "Usuário não encontrado" });
+  if (indiceUsuario < 0) {
+    return res.status(404)
+        .send({ error: "Usuário não encontrado"})
+        .json()
   }
 
-  usuarios.splice(usuarioIndex, 1);
+  usuarios.splice(indiceUsuario, 1)
 
-  res.status(204).send(); // Sem conteúdo, indicando que a operação foi bem-sucedida
-});
+  res.send({ message: "Excluído com sucesso!"}).json()
+})
 
 app.listen(3000, () => {
   console.log("Servidor rodando na porta 3000");
