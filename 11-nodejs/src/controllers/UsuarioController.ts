@@ -51,7 +51,7 @@ export class UsuarioController {
   }
 
   async updateUsuario(req: Request, res: Response) {
-    const { id } = req.body;
+    const { id } = req.params;
     const dados: UsuarioRequestDTO = req.body;
 
     if (!dados.email) {
@@ -81,5 +81,19 @@ export class UsuarioController {
     };
 
     res.send(usuarios[indiceUsuario]).json();
+  }
+
+  async deleteUsuario(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const indiceUsuario = usuarios.findIndex((user) => user.id == id);
+
+    if (indiceUsuario < 0) {
+      return res.status(404).send({ error: "Usuário não encontrado" }).json();
+    }
+
+    usuarios.splice(indiceUsuario, 1);
+
+    res.send({ message: "Excluído com sucesso!" }).json();
   }
 }
