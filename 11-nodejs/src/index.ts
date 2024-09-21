@@ -1,26 +1,10 @@
 import express, { Express, Request, Response, Router } from "express";
 import { usuarios } from "./usuarios";
+import usuarioRoutes from "./routes/usuarioRoutes";
 
 const app: Express = express();
-app.use(express.json())
-
-app.get("/usuarios", (req: Request, res: Response) => {
-  res.send(usuarios).json();
-});
-
-app.get("/usuarios/:id", (req: Request, res: Response) => {
-    const { id } = req.params
-
-    const resultado = usuarios.filter(user => user.id == id)
-
-    if (resultado.length == 0) {
-      return res.status(404)
-        .send({ error: "Usuário não encontrado"})
-        .json()
-    }
-
-    res.send(resultado[0]).json()
-})
+app.use(express.json());
+app.use(usuarioRoutes);
 
 type UsuarioRequestDTO = {
   name: string
