@@ -1,0 +1,16 @@
+{
+    "type": "mysql",
+    "host": "<SEU_HOST>",
+    "port": 3306,
+    "username": "<SEU_USUARIO>",
+    "password": "<SUA_SENHA>",
+    "database": "<SEU_BANCO>",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+        "src/models/**/*.ts"
+    ],
+    "migrations": [
+        "src/database/migrations/**/*.ts"
+    ]
+}
